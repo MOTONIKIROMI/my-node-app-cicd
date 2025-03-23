@@ -1,4 +1,4 @@
-name: Docker Build CI
+name: Docker Build and Push
 
 on:
   push:
@@ -15,3 +15,9 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t my-node-app:latest .
+
+      - name: Log in to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Push Docker image
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/my-node-app:latest
