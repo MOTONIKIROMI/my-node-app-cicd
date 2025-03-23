@@ -16,6 +16,10 @@ jobs:
       - name: Build Docker image
         run: docker build -t my-node-app:latest .
 
+
+      - name: Tag Docker image
+        run: docker tag my-node-app:latest ${{ secrets.DOCKER_USERNAME }}/my-node-app:latest  
+
       - name: Log in to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
